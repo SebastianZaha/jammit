@@ -74,7 +74,7 @@ module Jammit
     def pack_individual_asset(package, extension, asset)
       package_paths = package_for(package, extension)[:paths]
       url_map = package_paths.inject({}) do |map, path|
-        key = path.sub(@path_to_url, '').sub(/\A\//, '')
+        key = path.sub(path_to_url, '').sub(/\A\//, '')
         map[key] = path
         map
       end
@@ -186,9 +186,9 @@ module Jammit
         packages[name][:urls] = paths.map do |path|
           case path
           when Jammit::COFFEE_EXTENSION_MATCHER, Jammit.template_extension_matcher
-            "/#{Jammit.package_path}/#{name}.#{extension}#{path.sub(@path_to_url, '')}"
+            "/#{Jammit.package_path}/#{name}.#{extension}#{path.sub(path_to_url, '')}"
           else
-            path.sub(@path_to_url, '')
+            path.sub(path_to_url, '')
           end
         end
       end
